@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			
+			<h4 class="card-title">
+			<a class="btn btn-primary btn-xs"
+								th:href="@{/invoice/form/} + ${client.id}" th:text="'create invoice'"></a>
+			</h4>
+			
+				<img th:if="${#strings.length(client.photo) > 0}" class="img-thumbnail rounded float-left"
+					style="max-width: 25%;" th:src="@{'/uploads/' + ${client.photo}}"
+					th:alt="${client.photo}" />
+
+				<ul class="list-group">
+					<li class="list-group-item active" th:text="${client.name}"></li>
+					<li class="list-group-item" th:text="${client.lastName}"></li>
+					<li class="list-group-item" th:text="${client.email}"></li>
+					<li class="list-group-item" th:text="${client.createDate}"></li>
+				</ul>
+
+				<div th:if="${#lists.isEmpty(client.invoices)}"
+					class="alert alert-info my-4"
+					th:text="'No existen facturar para el cliente ' + ${client.nameComplete()} "></div>
+				<table th:if="${not #lists.isEmpty(client.invoices)}"
+					class="table table-bordered table-spriped my-4">
+					<thead class="thead-inverse">
+						<tr>
+							<th>Folio</th>
+							<th>Description</th>
+							<th>Fecha</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="invoice :${client.invoices}">
+							<td th:text="${invoice.id}"></td>
+							<td th:text="${invoice.description}"></td>
+							<td th:text="${invoice.createDate}"></td>
+							<td th:text="${invoice.total}"></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
