@@ -25,18 +25,66 @@
 				},
 				select : function(event, ui) {
 					//$("#findProduct").val(ui.item.label);
+					
+					if(itemsHelper.hasProduct(ui.item.value)){
+						itemsHelper.incrementAmount(ui.item.value, ui.item.price);
+						return false;
+					}
 					var linea = $("#templateItemsInvoice").html();
 					linea = linea.replace(/{ID}/g, ui.item.value);
 					linea = linea.replace(/{NAME}/g, ui.item.label);
 					linea = linea.replace(/{PRICE}/g, ui.item.price);
 
 					$("#loadItemsProduct tbody").append(linea);
-					
+					itemsHelper.calculateAmount(ui.item.value, ui.item.price, 1);
+
 					$("#findProduct").val("");
 					return false;
 				}
 			});
+			
+			$("form").submit(function(){
+				
+				$("#templateItemsInvoice").remove();
+			});
 		});
+		
+		var itemsHelper = {
+				calculateAmount: function (id, price, amount){
+					$("#total_importe_" + id).html(parseInt(price)	*	parseInt(amount));
+					this.calculateTotal();
+				},
+				hasProduct: function (id){
+					var result = false;
+					$('input[name="item_id[]"]').each(
+					function(){
+						if(parseInt(id)== parseInt($(this).val())){
+							result= true;
+						}
+					});
+					return result;
+				},
+				incrementAmount: function(id, price){
+					
+					var amount = $("#cantidad_"+id).val()? parseInt($("#cantidad_"+id).val()) : 0;
+					$("#cantidad_"+id).val(++amount);
+					this.calculateAmount(id, price, amount);
+				},
+				deleteItemInvoice: function(id){
+					
+					$("#row_"+ id).remove();
+					this.calculateTotal();
+				},
+				calculateTotal: function(){
+					var total = 0;
+					
+					$('span[id^="total_importe_"]').each(function(){
+						total += parseInt($(this).html());
+					});
+					
+					$("#total").html(total);
+				}
+		}
 	</script>
 </body>
 </html>

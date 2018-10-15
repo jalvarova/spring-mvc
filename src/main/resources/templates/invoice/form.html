@@ -8,7 +8,7 @@
 	<div class="container py-4">
 
 		<div class="card bg-light">
-			<div class="card-header" th:text="titulo"></div>
+			<div class="card-header"  th:text="${titulo}"></div>
 			<div class="card-body">
 				<h4 class="card-title">
 				<a class="btn btn-primary btn-xs"
@@ -27,7 +27,9 @@
 					<div class="form-group row">
 						<label th:text="'Descripción'" class="col-sm-2 col-form-label"></label>
 						<div class="col-sm-6">
-							<input type="text" th:field="*{description}" class="form-control">
+							<input type="text" th:field="*{description}" class="form-control" th:errorclass="'form-control is-invalid'">
+							<div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+
 						</div>
 					</div>
 					<div class="form-group row">
@@ -54,13 +56,16 @@
 								<th>Nombre</th>
 								<th>Precio</th>
 								<th>Cantidad</th>
+								<th>Total</th>
+								<th>Eliminar</th>
 							</tr>
 						</thead>
 						<tbody></tbody>
 					</table>
+					<h5>Total: &emsp;<span class="badge badge-secondary" id="total"> 0</span></h5>
 					<div class="form-group row">
 						<div class="col-sm-6">
-							<input type="button" th:value="${titulo}"
+							<input type="submit" th:value="${titulo}"
 								class="btn btn-secondary">
 						</div>
 					</div>
