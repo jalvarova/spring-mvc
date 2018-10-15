@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layout :: head">
+<meta charset="UTF-8">
+</head>
 <body>
 
 	<header th:replace="layout/layout :: header"></header>
@@ -38,6 +40,8 @@
 							<th>Description</th>
 							<th>Fecha</th>
 							<th>Total</th>
+							<th>ver</th>
+							<th>eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -46,6 +50,10 @@
 							<td th:text="${invoice.description}"></td>
 							<td th:text="${invoice.createDate}"></td>
 							<td th:text="${invoice.total}"></td>
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/invoice/ver/} + ${invoice.id}" th:text="'detalle'"></a></td>
+								<td><a class="btn btn-danger btn-xs"
+								th:href="@{/invoice/delete/} + ${invoice.id}" th:text="'X'" onclick="return confirm('¿Deseas Eliminar?');"></a></td>
 						</tr>
 					</tbody>
 				</table>

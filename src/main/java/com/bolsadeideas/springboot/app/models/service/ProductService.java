@@ -6,4 +6,7 @@ import com.bolsadeideas.springboot.app.models.entity.Product;
 
 public interface ProductService {
 	List<Product> findByName(String term);
+	
+	Product findProductById(Long id);
+	
 }
