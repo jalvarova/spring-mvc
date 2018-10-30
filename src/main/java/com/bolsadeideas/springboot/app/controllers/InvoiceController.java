@@ -116,7 +116,7 @@ public class InvoiceController {
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable Long id,Model model, RedirectAttributes flash) {
 		
-		Invoice invoice = invoiceService.findInvoiceById(id);
+		Invoice invoice = invoiceService.findInvoiceByIdWithClient(id);
 		
 		if (ObjectsUtils.isEmpty(invoice)) {
 			flash.addFlashAttribute("error","Error al encontrar la factura");

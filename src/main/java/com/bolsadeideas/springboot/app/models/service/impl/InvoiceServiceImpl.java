@@ -30,6 +30,11 @@ public class InvoiceServiceImpl implements InvoiceService{
 		invoiceDao.deleteById(id);
 		
 	}
+	@Override
+	@Transactional(readOnly=true)
+	public Invoice findInvoiceByIdWithClient(Long id) {
+		return invoiceDao.findInvoiceByIdWithClient(id);
+	}
 	
 	
 	

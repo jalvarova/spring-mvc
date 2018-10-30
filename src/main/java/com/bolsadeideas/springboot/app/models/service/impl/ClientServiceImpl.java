@@ -50,5 +50,12 @@ public class ClientServiceImpl implements ClientService{
 		return clienteDao.findAll(pageable);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Client fetchByIdWidthInvoice(Long id) {
+		return clienteDao.fetchByIdWidthInvoice(id);
+	}
+
+	
 	
 }

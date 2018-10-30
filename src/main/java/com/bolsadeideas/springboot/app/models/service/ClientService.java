@@ -17,6 +17,8 @@ public interface ClientService {
 	
 	public Client findOne(Long id);
 	
+	Client fetchByIdWidthInvoice(Long id);
+	
 	public void delete(Long id);
 	
 }
