@@ -3,11 +3,13 @@ package com.bolsadeideas.springboot.app.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 
 import org.springframework.data.domain.Page;
@@ -49,6 +51,9 @@ public class ClientController {
 	@Autowired
 	private IUploadFileService uploadFileService;
 
+	@Autowired
+	private MessageSource messageSource;
+
 	@GetMapping("/")
 	public String redirect() {
 		return REDIRECT;
@@ -86,14 +91,14 @@ public class ClientController {
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
-			Authentication authentication) {
+			Authentication authentication, Locale locale) {
 
 		Pageable pageRequest = PageRequest.of(page, 4);
 
 		Page<Client> clientes = clienteService.findAll(pageRequest);
 
 		PageRender<Client> pageRender = new PageRender<Client>("/listar", clientes);
-		model.addAttribute("titulo", "Listado de clientes");
+		model.addAttribute("titulo", messageSource.getMessage("text.cliente.listar.titulo", null, locale));
 		model.addAttribute("clients", clientes);
 		model.addAttribute("page", pageRender);
 		return "listar";
