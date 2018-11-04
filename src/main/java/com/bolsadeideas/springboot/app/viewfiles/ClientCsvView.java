@@ -15,9 +15,9 @@ import org.supercsv.prefs.CsvPreference;
 import com.bolsadeideas.springboot.app.models.entity.Client;
 
 @Component("listar.csv")
-public class InvoiceCsvView extends AbstractView {
+public class ClientCsvView extends AbstractView {
 
-	public InvoiceCsvView() {
+	public ClientCsvView() {
 
 		setContentType("text/csv");
 	}

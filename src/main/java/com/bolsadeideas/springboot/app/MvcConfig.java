@@ -4,12 +4,15 @@ import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import com.bolsadeideas.springboot.app.viewfiles.model.ClientList;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -18,7 +21,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	 * private final Logger log = LoggerFactory.getLogger(getClass());
 	 * 
 	 * @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	 * // TODO Auto-generated method stub super.addResourceHandlers(registry);
 	 * 
 	 * String resourcePath =
 	 * Paths.get("uploads").toAbsolutePath().toUri().toString();
@@ -31,7 +33,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	 */
 //	@Override
 //	public void addViewControllers(ViewControllerRegistry registry) {
-//		// TODO Auto-generated method stub
 //		WebMvcConfigurer.super.addViewControllers(registry);
 //	}	
 
@@ -59,4 +60,13 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
 	}
+
+	@Bean
+	public Jaxb2Marshaller jaxb2Marshaller() {
+		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+		jaxb2Marshaller.setClassesToBeBound(new Class[] { ClientList.class });
+		return jaxb2Marshaller;
+
+	}
+
 }

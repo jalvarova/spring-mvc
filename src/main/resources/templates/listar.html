@@ -17,6 +17,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						cliente</a>
 					<a th:href="@{'/listar'(format=csv)}"
 						class="btn btn-light btn-xs float-right mx-1"><img style="height: 30px; width: 30px;"  th:src="@{/images/csv.png}" /></a>
+				
+					<a th:href="@{'/listar'(format=xml)}"
+						class="btn btn-light btn-xs float-right mx-1"><img style="height: 30px; width: 30px;"  th:src="@{/images/xml.png}" /></a>
 				</h4>
 				
 				<table class="table table-striped table-bordered">

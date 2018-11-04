@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.xml.bind.annotation.XmlTransient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -44,6 +45,7 @@ public class Invoice implements Serializable {
 	@Column(name = "create_date")
 	private Date createDate;
 
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Client client;
 
@@ -70,5 +72,9 @@ public class Invoice implements Serializable {
 				.collect(Collectors.summingDouble(ItemInvoice::calculateAmount));
 	}
 
+	@XmlTransient
+	public Client getClient() {
+		return client;
+	}
 	private static final long serialVersionUID = 1L;
 }
