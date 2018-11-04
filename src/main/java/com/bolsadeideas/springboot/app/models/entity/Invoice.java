@@ -23,6 +23,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,6 +49,7 @@ public class Invoice implements Serializable {
 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private Client client;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

@@ -20,6 +20,7 @@ import lombok.Setter;
 @Table(name = "products")
 @Getter
 @Setter
+
 public class Product implements Serializable {
 
 	@Id
