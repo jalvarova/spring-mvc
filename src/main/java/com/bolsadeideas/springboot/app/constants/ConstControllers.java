@@ -4,5 +4,6 @@ public interface ConstControllers {
 
 	String REDIRECT = "redirect:/listar";
 	String REDIRECT_INVOICE = "invoice/form";
+	String REDIRECT_INIT = "redirect:/";
 
 }
