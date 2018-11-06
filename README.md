@@ -9,3 +9,6 @@ https://poi.apache.org/components/spreadsheet/examples.html
 #Link Expor Csv con Super CSV
 
 http://super-csv.github.io/super-csv/
+
+#Librería JWT
+https://jwt.io/
