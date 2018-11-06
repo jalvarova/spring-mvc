@@ -74,6 +74,7 @@
 		</div>
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
+	<input  type="hidden" id="urlAjax" th:value="@{'/invoice/load-products/'}">
 	<script th:replace="invoice/js/autocomplete :: javascript" ></script>
 </body>
 </html>
