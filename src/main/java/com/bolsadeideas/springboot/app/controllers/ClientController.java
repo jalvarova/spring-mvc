@@ -5,12 +5,10 @@ import static com.bolsadeideas.springboot.app.constants.ConstControllers.REDIREC
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
-import javax.xml.ws.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -20,6 +18,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,7 +60,8 @@ public class ClientController {
 	public String redirect() {
 		return REDIRECT;
 	}
-
+	
+	@Secured({"ROLE_USER"})
 	@GetMapping(value = "/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
 
@@ -78,6 +78,7 @@ public class ClientController {
 				.body(recurso);
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -107,6 +108,7 @@ public class ClientController {
 		return "listar";
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/form")
 	public String crear(Map<String, Object> model) {
 
@@ -115,7 +117,7 @@ public class ClientController {
 		model.put("titulo", "Crear Cliente");
 		return "form";
 	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -136,6 +138,7 @@ public class ClientController {
 		return "form";
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String guardar(@Valid Client cliente, BindingResult result, Model model,
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) {
@@ -173,7 +176,7 @@ public class ClientController {
 		flash.addFlashAttribute("success", mensajeFlash);
 		return REDIRECT;
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 

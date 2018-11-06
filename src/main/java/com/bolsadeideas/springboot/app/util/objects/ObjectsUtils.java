@@ -11,6 +11,9 @@ public class ObjectsUtils {
 		super();
 	}
 
+	public static boolean isNull(String string) {
+		return string!=null;
+	}
 	
 	public static boolean isEmptyNumber(Number... number) {
 		

@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.bolsadeideas.springboot.datajpa.app</groupId>
-	<artifactId>spring-boot-data-jpa</artifactId>
+	<groupId>com.bolsadeideas.springboot.jwt.app</groupId>
+	<artifactId>spring-boot-data-jwt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-boot-data-jpa</name>
+	<name>spring-boot-data-jwt</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -104,6 +104,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
 		</dependency>
 	</dependencies>
 
