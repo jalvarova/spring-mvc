@@ -4,10 +4,12 @@
 
 	<script type="text/javascript" th:fragment="javascript">
 		$(document).ready(function() {
+			var urlAjax = $("#urlAjax").val();
+
 			$("#findProduct").autocomplete({
 				source : function(rq, rs) {
 					$.ajax({
-						url : "/invoice/load-products/" + rq.term,
+						url : urlAjax + rq.term,
 						dataType : "json",
 						data : {
 							term : rq.term

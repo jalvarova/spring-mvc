@@ -12,3 +12,9 @@ http://super-csv.github.io/super-csv/
 
 #Librería JWT
 https://jwt.io/
+
+#Server Deploy
+
+Wildfly : http://wildfly.org/
+apache : http://tomcat.apache.org/
+glassfish : https://javaee.github.io/glassfish/

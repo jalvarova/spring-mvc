@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,13 +26,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 		.authorizeRequests()
-		.antMatchers("/","/css/**","/js/**","/imges/**","/listar","/locale","/api/**")
+		.antMatchers("/","/css/**","/js/**","/imges/**","/locale","/api/**")
 		.permitAll()
 		.antMatchers("/ver/**").hasAnyRole("USER")
 		.antMatchers("/uploads/**").hasAnyRole("USER")
 		.antMatchers("/form/**").hasAnyRole("ADMIN")
 		.antMatchers("/eliminar/**").hasAnyRole("ADMIN")
 		.antMatchers("/invoice/**").hasAnyRole("ADMIN")
+//		.antMatchers(HttpMethod.POST).hasAnyRole("")
 		.anyRequest().authenticated()
 			.and()
 			.formLogin()
